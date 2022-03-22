@@ -218,7 +218,7 @@ console.log(store.getState());
 store.dispatch(addNoteText('Hello!'));
 console.log(store.getState());
 
-//! 13.Use Middleware to Handle Asynchronous Actions
+//! 12.Use Middleware to Handle Asynchronous Actions
 const REQUESTING_DATA = 'REQUESTING_DATA'
 const RECEIVED_DATA = 'RECEIVED_DATA'
 
@@ -265,7 +265,7 @@ const store = Redux.createStore(
   Redux.applyMiddleware(ReduxThunk.default)
 );
 
-//! 14.Write a Counter with Redux
+//! 13.Write a Counter with Redux
 const INCREMENT = 'INCREMENT';
 const DECREMENT = 'DECREMENT'; 
 
@@ -292,7 +292,7 @@ const decAction = () => {
 }
 const store = Redux.createStore(counterReducer);
 
-//! 15.Never Mutate State
+//! 14.Never Mutate State
 const ADD_TO_DO = 'ADD_TO_DO';
 
 // A list of strings representing tasks to do:
@@ -321,12 +321,11 @@ const addToDo = (todo) => {
 
 const store = Redux.createStore(immutableReducer);
 
-//! 16.Use the Spread Operator on Arrays
+//! 15.Use the Spread Operator on Arrays
 const immutableReducer = (state = ['Do not mutate state!'], action) => {
   switch(action.type) {
     case 'ADD_TO_DO':
       return [...state, action.todo]
-      return
     default:
       return state;
   }
@@ -341,7 +340,7 @@ const addToDo = (todo) => {
 
 const store = Redux.createStore(immutableReducer);
 
-//! 17. Remove an Item from an Array
+//! 16. Remove an Item from an Array
 
 const immutableReducer = (state = [0,1,2,3,4,5], action) => {
   switch(action.type) {
@@ -358,5 +357,31 @@ const removeItem = (index) => {
     index
   }
 }
+
+const store = Redux.createStore(immutableReducer);
+
+//! 17.Copy an Object with Object.assign
+
+const defaultState = {
+  user: 'CamperBot',
+  status: 'offline',
+  friends: '732,982',
+  community: 'freeCodeCamp'
+};
+
+const immutableReducer = (state = defaultState, action) => {
+  switch(action.type) {
+    case 'ONLINE':
+      return Object.assign({}, state, {status: 'online'})
+    default:
+      return state;
+  }
+};
+
+const wakeUp = () => {
+  return {
+    type: 'ONLINE'
+  }
+};
 
 const store = Redux.createStore(immutableReducer);
